@@ -1,4 +1,4 @@
-# Microsoft Automation with MS Graph APIs - NestJS Backend
+# Learning Microsoft Automation with MS Graph APIs - NestJS Backend
 ## Description
 I'm utilizing NestJS and Microsoft Graph APIs to learn how to automate Microsoft products like MS Teams, SharePoint, and MS Lists.
 
