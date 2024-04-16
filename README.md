@@ -2,7 +2,7 @@
 
 ## Description
 
-Microsoft Teams is kind of terrible, but like many organisations, I'm stuck in a Microsoft world.
+Microsoft Teams is kind of terrible, but like many employees, I'm stuck in a Microsoft world.
 I would love to automate some annoying steps I often have to repeat a lot.
 I also want to learn NestJS, so why not learn both at the same time.
 
