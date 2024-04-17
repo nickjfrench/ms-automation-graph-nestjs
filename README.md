@@ -48,6 +48,10 @@ yarn install
 
 ### 🔑 Azure Entra ID Secrets
 
+I'm using 1Password to manage secrets for this project. That's the things like `op://dev/item/secret-id` you'll see.
+
+You'll need to either re-point the secret path to your 1Pass vault and item or point to your system env if you're not using 1Pass.
+
 TODO: Flesh Out.
 
 ### 🏃 Running the app
@@ -85,3 +89,7 @@ As this project is for my own learning, this repo is [MIT licensed](LICENSE).
 I like to document my process to solidify what I learn, but if this helps you then that's even better.
 
 ### 1. Azure Entra App Registration
+
+## Resources Used
+
+- <https://medium.com/@swagatachaudhuri/implement-azure-ad-authentication-in-nest-js-1fe947da2c99>
