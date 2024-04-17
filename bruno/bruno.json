@@ -1,0 +1,13 @@
+{
+  "version": "1",
+  "name": "MS Automation via NestJS and MS Graph APIs",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "presets": {
+    "requestType": "http",
+    "requestUrl": "http://localhost:3000"
+  }
+}

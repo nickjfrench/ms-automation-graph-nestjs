@@ -54,6 +54,10 @@ You'll need to either re-point the secret path to your 1Pass vault and item or p
 
 TODO: Flesh Out.
 
+### Bruno REST API Client
+
+In the directory `/bruno` you'll see routes for the Bruno REST API Client. <https://www.usebruno.com/>
+
 ### 🏃 Running the app
 
 ```bash
