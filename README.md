@@ -46,29 +46,42 @@ To take it a step further, I would like to use pre-defined templates to structur
 yarn install
 ```
 
-### 🔑 Azure Entra ID Secrets
+### 🔑 Secrets
 
-I'm using 1Password to manage secrets for this project. That's the things like `op://dev/item/secret-id` you'll see.
+Set the below secrets as per <https://docs.nestjs.com/techniques/configuration>. For example, a `.env.development.local` file within project root folder.
 
-You'll need to either re-point the secret path to your 1Pass vault and item or point to your system env if you're not using 1Pass.
+- `AZURE_TENANT_ID`
+- `AZURE_CLIENT_ID`
+- `AZURE_CLIENT_SECRET`
+- `AZURE_REDIRECT_URI`
 
-TODO: Flesh Out.
+#### 🔒 1Password CLI for Secret Management
+
+I'm using 1Password to manage secrets for this project. That means no secrets are stored in files or in environment variables. This is optional, although the package will be installed regardless.
+
+If you wish to use 1Password, ensure 1Password CLI is set up correctly and you're using 1Password secret paths within a .env file. For example, my `.env.development.local` file contains: `AZURE_TENANT_ID=op://Dev/azure-entra/tenant-id`.
+Then start the project with `yarn start:dev_op`.
+
+If not using 1Password, ignore this section and just use the standard start scripts (that have no `_op` appended).
 
 ### Bruno REST API Client
 
-In the directory `/bruno` you'll see routes for the Bruno REST API Client. <https://www.usebruno.com/>
+In the directory `/bruno` you'll see route testing for the Bruno REST API Client. <https://www.usebruno.com/>
 
 ### 🏃 Running the app
 
 ```bash
 # development
-yarn run start
+yarn start
 
 # watch mode
-yarn run start:dev
+yarn start:dev
+
+# watch mode with 1Password CLI secrets management 
+yarn start:dev_op
 
 # production mode
-yarn run start:prod
+yarn start:prod
 ```
 
 ### 🔨 Test
@@ -95,5 +108,3 @@ I like to document my process to solidify what I learn, but if this helps you th
 ### 1. Azure Entra App Registration
 
 ## Resources Used
-
-- <https://medium.com/@swagatachaudhuri/implement-azure-ad-authentication-in-nest-js-1fe947da2c99>
