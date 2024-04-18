@@ -6,6 +6,7 @@ import {
 } from '@azure/msal-node';
 import { ConfigService } from '@nestjs/config';
 import axios, { AxiosResponse } from 'axios';
+import { Request } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -31,14 +32,19 @@ export class AuthService {
     return await this.msalClient.getAuthCodeUrl(authUrlParameters);
   }
 
-  async handleRedirect(callbackUrl: string): Promise<AuthenticationResult> {
+  async handleRedirect(
+    req: Request,
+    callbackUrl: string,
+  ): Promise<AuthenticationResult> {
     const tokenRequest = {
       code: callbackUrl,
       scopes: ['user.read'],
       redirectUri: this.configService.get<string>('AZURE_REDIRECT_URI'),
     };
 
-    return await this.msalClient.acquireTokenByCode(tokenRequest);
+    const response = await this.msalClient.acquireTokenByCode(tokenRequest);
+    req.session.token = response.accessToken;
+    return response;
   }
 
   async getUserProfile(accessToken: string): Promise<any> {

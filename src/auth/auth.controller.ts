@@ -1,6 +1,6 @@
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import { Controller, Get, Query, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -14,15 +14,20 @@ export class AuthController {
 
   @Get('callback')
   async callback(
+    @Req() req: Request,
     @Query('code') code: string,
     @Res() res: Response,
   ): Promise<void> {
-    const authResponse = await this.authService.handleRedirect(code);
+    const authResponse = await this.authService.handleRedirect(req, code);
     // res.json(authResponse);
 
-    const userProfile = await this.authService.getUserProfile(
-      authResponse.accessToken,
-    );
+    // const userProfile = await this.authService.getUserProfile(
+    //   authResponse.accessToken,
+    // );
+    const redirectUrl = req.session.afterLoginRedirect || '/';
+    delete req.session.afterLoginRedirect;
+    res.redirect(redirectUrl);
+
     res.json({ token: authResponse, profile: userProfile });
   }
 }
