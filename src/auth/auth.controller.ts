@@ -18,6 +18,11 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<void> {
     const authResponse = await this.authService.handleRedirect(code);
-    res.json(authResponse);
+    // res.json(authResponse);
+
+    const userProfile = await this.authService.getUserProfile(
+      authResponse.accessToken,
+    );
+    res.json({ token: authResponse, profile: userProfile });
   }
 }
