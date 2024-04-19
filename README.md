@@ -54,6 +54,7 @@ Set the below secrets as per <https://docs.nestjs.com/techniques/configuration>.
 - `AZURE_CLIENT_ID`
 - `AZURE_CLIENT_SECRET`
 - `AZURE_REDIRECT_URI`
+- `SESSION_SECRET_KEY` - This is the secret used by Express-Session within App middleware.
 
 #### 🔒 1Password CLI for Secret Management
 
@@ -63,10 +64,6 @@ If you wish to use 1Password, ensure 1Password CLI is set up correctly and you'r
 Then start the project with `yarn start:dev_op`.
 
 If not using 1Password, ignore this section and just use the standard start scripts (that have no `_op` appended).
-
-### Bruno REST API Client
-
-In the directory `/bruno` you'll see route testing for the Bruno REST API Client. <https://www.usebruno.com/>
 
 ### 🏃 Running the app
 
