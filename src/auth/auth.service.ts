@@ -24,7 +24,7 @@ export class AuthService {
 
   async signIn(): Promise<string> {
     const authUrlParameters = {
-      scopes: ['user.read'],
+      scopes: ['user.read'], // TODO: Can this be dynamically read per API?
       redirectUri: this.configService.get<string>('AZURE_REDIRECT_URI'),
     };
 

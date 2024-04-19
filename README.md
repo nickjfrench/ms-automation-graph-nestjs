@@ -8,7 +8,10 @@ I also want to learn NestJS in a practical way, so why not learn both at the sam
 
 This repo is to document my learning in developing a backend API that can authenticate with a Azure tenant, and automate the creation and modification of Microsoft Teams channels/teams, SharePoint, and Microsoft Lists (aka SharePoint Lists).
 
+During this project, I found the online material for NestJS with Microsoft OAuth2.0 Flow to be quite confusing.
 If you'd like to see how I did it, scroll to the How I Did It section of this Readme.
+
+**Disclaimer**: I'm no expert or authority on these technologies, what I've done is just what I've learnt along the way and is definitely not production-safe. All I hope is that it gets you off the ground.
 
 ### ⭐ Goals
 
@@ -53,7 +56,7 @@ Set the below secrets as per <https://docs.nestjs.com/techniques/configuration>.
 - `AZURE_TENANT_ID`
 - `AZURE_CLIENT_ID`
 - `AZURE_CLIENT_SECRET`
-- `AZURE_REDIRECT_URI`
+- `AZURE_REDIRECT_URI` - {http/https}://{baseurl}/api/v1/auth/callback - Azure Entra App Registration needs to match.
 - `SESSION_SECRET_KEY` - This is the secret used by Express-Session within App middleware.
 
 #### 🔒 1Password CLI for Secret Management
@@ -104,4 +107,16 @@ I like to document my process to solidify what I learn, but if this helps you th
 
 ### 1. Azure Entra App Registration
 
-## Resources Used
+// App Registration, Client Secret, Scope/Permissions, and Redirect URI.
+
+### 2. Microsoft OAuth2 Flow and Test Graph Call
+
+// Auth Service, Controller, and Module
+
+// Session Management - Extending Session Type, Token and Redirect URL
+
+// Auth Guard
+
+// Unauthorized Exception Filter
+
+// User Profile and Graph Call with Token
