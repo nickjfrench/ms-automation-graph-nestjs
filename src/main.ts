@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { VersioningType } from '@nestjs/common';
 import { validateCli } from '@1password/op-js';
 import * as session from 'express-session';
+import { UnauthorizedExceptionFilter } from './unauthorized-exception/unauthorized-exception.filter';
 
 // Set development configs here.
 if (process.env.NODE_ENV === 'development') {
@@ -34,9 +35,14 @@ async function bootstrap() {
       secret: process.env.SESSION_SECRET_KEY,
       resave: false,
       saveUninitialized: false,
-      cookie: { secure: false }, // Set true if using HTTPS
+      cookie: {
+        secure: false, // Set true if using HTTPS
+        maxAge: 60 * 60 * 1000, // 1 hour
+      },
     }),
   );
+
+  app.useGlobalFilters(new UnauthorizedExceptionFilter());
 
   await app.listen(3000);
 }
