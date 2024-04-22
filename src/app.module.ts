@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserService } from './user/user.service';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
-import Joi from 'joi';
+import * as Joi from 'joi'; // Needs the * as Joi, to avoid compiling errors.
 
 @Module({
   imports: [

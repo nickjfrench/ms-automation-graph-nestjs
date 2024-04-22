@@ -5,11 +5,14 @@ import { Request } from 'express';
 
 @Controller('user')
 export class UserController {
-  constructor(private authService: UserService) {}
+  constructor(private userService: UserService) {}
 
   @Get()
   @UseGuards(AuthGuard)
   async getUserProfile(@Req() req: Request): Promise<any> {
-    return this.authService.getUserProfile(req.session.token);
+    if (!req.session.token) {
+      throw new Error('No access token found in session. Please try again.');
+    }
+    return this.userService.getUserProfile(req.session.token);
   }
 }
