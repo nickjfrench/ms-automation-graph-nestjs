@@ -52,16 +52,17 @@ export class AuthService {
 
   async handleRedirect(
     req: Request,
-    callbackUrl: string,
+    code: string,
   ): Promise<AuthenticationResult> {
     const tokenRequest = {
-      code: callbackUrl,
+      code: code,
       scopes: appConfig.AZURE_SCOPES,
       redirectUri: this.configService.get<string>('AZURE_REDIRECT_URI', {
         infer: true,
       }),
     };
 
+    // Code is received in the URL from Redirection URI. MSAL then handles the exchange of code for token.
     const response = await this.msalClient.acquireTokenByCode(tokenRequest);
     req.session.token = response.accessToken;
 
