@@ -14,9 +14,10 @@ export class AuthService {
   constructor(private configService: ConfigService) {
     const msalConfig: Configuration = {
       auth: {
-        clientId: this.configService.get<string>('AZURE_CLIENT_ID'),
-        authority: `https://login.microsoftonline.com/${this.configService.get<string>('AZURE_TENANT_ID')}`,
-        clientSecret: this.configService.get<string>('AZURE_CLIENT_SECRET'),
+        clientId: this.configService.get<string>('AZURE_CLIENT_ID') ?? '',
+        authority: `https://login.microsoftonline.com/${this.configService.get<string>('AZURE_TENANT_ID') || ''}`,
+        clientSecret:
+          this.configService.get<string>('AZURE_CLIENT_SECRET') ?? '',
       },
     };
     this.msalClient = new ConfidentialClientApplication(msalConfig);
@@ -25,7 +26,7 @@ export class AuthService {
   async signIn(): Promise<string> {
     const authUrlParameters = {
       scopes: ['user.read'], // TODO: Can this be dynamically read per API?
-      redirectUri: this.configService.get<string>('AZURE_REDIRECT_URI'),
+      redirectUri: this.configService.get<string>('AZURE_REDIRECT_URI') ?? '',
     };
 
     return await this.msalClient.getAuthCodeUrl(authUrlParameters);
