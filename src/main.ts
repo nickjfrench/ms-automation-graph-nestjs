@@ -18,23 +18,6 @@ if (process.env.ONEPASS === 'true') {
   });
 }
 
-// Check that System Envs are set.
-if (!process.env.AZURE_CLIENT_ID) {
-  throw new Error('AZURE_CLIENT_ID env not set.');
-}
-if (!process.env.AZURE_TENANT_ID) {
-  throw new Error('AZURE_TENANT_ID env not set.');
-}
-if (!process.env.AZURE_CLIENT_SECRET) {
-  throw new Error('AZURE_CLIENT_SECRET env not set.');
-}
-if (!process.env.AZURE_REDIRECT_URI) {
-  throw new Error('AZURE_REDIRECT_URI env not set.');
-}
-if (!process.env.SESSION_SECRET_KEY) {
-  throw new Error('SESSION_SECRET_KEY env not set.');
-}
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
