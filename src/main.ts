@@ -5,6 +5,7 @@ import { validateCli } from '@1password/op-js';
 import * as session from 'express-session';
 import { UnauthorizedExceptionFilter } from './unauthorized-exception/unauthorized-exception.filter';
 import crypto from 'crypto';
+import { ConfigService } from '@nestjs/config';
 
 // Session Management - Using HTTPS?
 let isSessionSecure = true;
@@ -25,6 +26,7 @@ if (process.env.ONEPASS === 'true') {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
 
   // Set Route Prefix to begin with /api/. E.g. localhost:3000/api
   app.setGlobalPrefix('api');
@@ -37,8 +39,9 @@ async function bootstrap() {
   // Session Management - This is not safe for Production.
   app.use(
     session({
+      // Generate a random session secret if not provided.
       secret:
-        process.env.SESSION_SECRET_KEY ||
+        configService.get<string>('SESSION_SECRET_KEY') ||
         crypto.randomBytes(32).toString('hex'),
       resave: false,
       saveUninitialized: false,
