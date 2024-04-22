@@ -56,7 +56,7 @@ export class AuthService {
   ): Promise<AuthenticationResult> {
     const tokenRequest = {
       code: callbackUrl,
-      scopes: ['user.read'],
+      scopes: appConfig.AZURE_SCOPES,
       redirectUri: this.configService.get<string>('AZURE_REDIRECT_URI', {
         infer: true,
       }),
