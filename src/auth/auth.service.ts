@@ -6,6 +6,7 @@ import {
 } from '@azure/msal-node';
 import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
+import * as appConfig from 'appConfig.json';
 
 @Injectable()
 export class AuthService {
@@ -40,7 +41,7 @@ export class AuthService {
 
   async signIn(): Promise<string> {
     const authUrlParameters = {
-      scopes: ['user.read'], // TODO: Can this be dynamically read per API?
+      scopes: appConfig.AZURE_SCOPES, // TODO: Can this be dynamically read per API?
       redirectUri: this.configService.get<string>('AZURE_REDIRECT_URI', {
         infer: true,
       }),
