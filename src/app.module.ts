@@ -8,11 +8,31 @@ import { AuthModule } from './auth/auth.module';
 import { UserService } from './user/user.service';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
+import * as Joi from 'joi'; // Needs the * as Joi, to avoid compiling errors.
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      validationSchema: Joi.object({
+        // Environment
+        NODE_ENV: Joi.string()
+          .valid('development', 'production')
+          .default('production'),
+        PORT: Joi.number().default(3000),
+
+        // Azure Authentication
+        AZURE_TENANT_ID: Joi.string().required(),
+        AZURE_CLIENT_ID: Joi.string().required(),
+        AZURE_CLIENT_SECRET: Joi.string().required(),
+        AZURE_REDIRECT_URI: Joi.string().required(),
+
+        // Session Management
+        SESSION_SECRET_KEY: Joi.string().required(),
+      }),
+      validationOptions: {
+        allowUnknown: true,
+      },
     }),
     AuthModule,
     UserModule,
