@@ -49,6 +49,12 @@ To take it a step further, I would like to use pre-defined templates to structur
 yarn install
 ```
 
+### ☁️ Azure Entra App Registration
+
+// Set Scopes as per `appConfig.json`
+
+// Set RedirectURI to `http://localhost:3000/api/v1/auth/callback` or production equivalent.
+
 ### 🔑 Secrets
 
 Set the below secrets as per <https://docs.nestjs.com/techniques/configuration>. For example, a `.env.development.local` file within project root folder.
@@ -105,20 +111,4 @@ As this project is for my own learning, this repo is [MIT licensed](LICENSE).
 
 I like to document my process to solidify what I learn, so I hope you get some value out of this too.
 
-### 0. Azure Entra App Registration
-
-// App Registration, Client Secret, Scope/Permissions, and Redirect URI.
-
-### 1. Microsoft OAuth2 (MSAL) Flow and Test Graph Call
-
-See the [#01-Setup-MSAL-and-Testing-Graph](https://github.com/nickjfrench/ms-automation-graph-nestjs/tree/01-Setup-MSAL-and-Testing-Graph) Branch.
-
-// Auth Service, Controller, and Module
-
-// Session Management - Extending Session Type, Token and Redirect URL
-
-// Auth Guard
-
-// Unauthorized Exception Filter
-
-// User Profile and Graph Call with Token
+See [docs/write-up/README.md](docs/write-up/README.md) for step-by-step write up on how I implemented this project.
