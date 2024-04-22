@@ -64,6 +64,9 @@ export class AuthService {
 
     const response = await this.msalClient.acquireTokenByCode(tokenRequest);
     req.session.token = response.accessToken;
+
+    console.log('User sign in successful.');
+
     return response;
   }
 }
