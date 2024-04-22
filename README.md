@@ -103,13 +103,15 @@ As this project is for my own learning, this repo is [MIT licensed](LICENSE).
 
 ## 🧑‍🏫 How I Did It
 
-I like to document my process to solidify what I learn, but if this helps you then that's even better.
+I like to document my process to solidify what I learn, so I hope you get some value out of this too.
 
-### 1. Azure Entra App Registration
+### 0. Azure Entra App Registration
 
 // App Registration, Client Secret, Scope/Permissions, and Redirect URI.
 
-### 2. Microsoft OAuth2 Flow and Test Graph Call
+### 1. Microsoft OAuth2 (MSAL) Flow and Test Graph Call
+
+See the [#01-Setup-MSAL-and-Testing-Graph](https://github.com/nickjfrench/ms-automation-graph-nestjs/tree/01-Setup-MSAL-and-Testing-Graph) Branch.
 
 // Auth Service, Controller, and Module
 
