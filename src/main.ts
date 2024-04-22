@@ -4,10 +4,15 @@ import { VersioningType } from '@nestjs/common';
 import { validateCli } from '@1password/op-js';
 import * as session from 'express-session';
 import { UnauthorizedExceptionFilter } from './unauthorized-exception/unauthorized-exception.filter';
+import crypto from 'crypto';
+
+// Session Management - Using HTTPS?
+let isSessionSecure = true;
 
 // Set development configs here.
 if (process.env.NODE_ENV === 'development') {
   console.log('Server starting for Development.');
+  isSessionSecure = false;
 }
 
 // Validate 1Password when using start:dev_op.
@@ -32,11 +37,13 @@ async function bootstrap() {
   // Session Management - This is not safe for Production.
   app.use(
     session({
-      secret: process.env.SESSION_SECRET_KEY,
+      secret:
+        process.env.SESSION_SECRET_KEY ||
+        crypto.randomBytes(32).toString('hex'),
       resave: false,
       saveUninitialized: false,
       cookie: {
-        secure: false, // Set true if using HTTPS
+        secure: isSessionSecure,
         maxAge: 60 * 60 * 1000, // 1 hour
       },
     }),
