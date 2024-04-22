@@ -70,6 +70,8 @@ See the Secrets section of project [Readme](../../README.md).
 
 See the [#01-Setup-MSAL-and-Testing-Graph](https://github.com/nickjfrench/ms-automation-graph-nestjs/tree/01-Setup-MSAL-and-Testing-Graph) branch.
 
+// Explain the OAuth2.0 Flow.
+
 // Auth Service, Controller, and Module
 
 // Session Management - Extending Session Type, Token and Redirect URL
