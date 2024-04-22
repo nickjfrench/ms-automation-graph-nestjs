@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import axios, { AxiosResponse } from 'axios';
 
 @Injectable()
 export class UserService {
-  constructor(private configService: ConfigService) {}
+  constructor() {}
 
   async getUserProfile(accessToken: string): Promise<any> {
     try {
