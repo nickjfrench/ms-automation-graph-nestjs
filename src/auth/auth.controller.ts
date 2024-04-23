@@ -40,8 +40,13 @@ export class AuthController {
   ): Promise<void> {
     await this.authService.handleRedirect(req, code);
 
-    const redirectUrl = req.session.afterLoginRedirect || '/';
-    delete req.session.afterLoginRedirect;
+    // Get the original destination URL from the session or return '/'.
+    const redirectUrl = await this.authService.getAfterLoginRedirect(req);
+
+    // Delete AfterLoginRedirect from Session. Awaiting for Async function not required.
+    this.authService.deleteAfterLoginRedirect(req);
+
+    // Redirect user back to their original destination.
     res.redirect(redirectUrl);
   }
 }

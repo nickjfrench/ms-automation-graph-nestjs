@@ -41,7 +41,7 @@ export class AuthService {
 
   async signIn(): Promise<string> {
     const authUrlParameters = {
-      scopes: appConfig.AZURE_SCOPES, // TODO: Can this be dynamically read per API?
+      scopes: appConfig.AZURE_SCOPES,
       redirectUri: this.configService.get<string>('AZURE_REDIRECT_URI', {
         infer: true,
       }),
@@ -88,5 +88,13 @@ export class AuthService {
 
       resolve(HttpStatus.OK);
     });
+  }
+
+  async getAfterLoginRedirect(req: Request): Promise<string> {
+    return req.session.afterLoginRedirect || '/';
+  }
+
+  async deleteAfterLoginRedirect(req: Request): Promise<void> {
+    delete req.session.afterLoginRedirect;
   }
 }
