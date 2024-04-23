@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import {
   ConfidentialClientApplication,
   Configuration,
@@ -72,5 +72,21 @@ export class AuthService {
     else console.log('Unknown User sign in successful.');
 
     return response;
+  }
+
+  async signOut(req: Request): Promise<HttpStatus> {
+    return new Promise((resolve, reject) => {
+      // If no token, user is not signed in.
+      if (!req.session.token) resolve(HttpStatus.BAD_REQUEST);
+
+      // Destroy user session to log out.
+      req.session.destroy((err) => {
+        if (err) {
+          reject(new Error('Error logging out: ' + err.message));
+        }
+      });
+
+      resolve(HttpStatus.OK);
+    });
   }
 }

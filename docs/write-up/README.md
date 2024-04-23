@@ -72,6 +72,21 @@ See the [#01-Setup-MSAL-and-Testing-Graph](https://github.com/nickjfrench/ms-aut
 
 // Explain the OAuth2.0 Flow.
 
+Now we have Azure Entra app registration configured, we can use it to perform an OAuth2.0 flow.
+There are plenty of guides on the internet explaining how OAuth2.0 works, so I won't go into detail.
+
+The basics for how it's implemented within this project are:
+
+1. Use an NestJS AuthGuard to perform a check on a protected endpoint (e.g. /user). This checks the user's session for a token.
+1. If no token, raise an UnauthorizedException. This is picked up by a custom NestJS UnauthorizedException filter.
+1. Save the original request url (/user) within session.
+1. Redirect the user to Microsoft for authorization. This link is built with a standard login with the Tenant ID appended:
+`https://login.microsoftonline.com/AZURE_TENANT_ID`
+1. As Entra knows our redirect URI, it sends the client back to that endpoint with the code appended (/auth/callback?code=xxxxx).
+1. The Callback endpoint handles the redirection and uses the code to request an access token (handled by MSAL-Node library) along with the Client Secret.
+1. The token is saved to the user's session and the original redirection URL is read from session.
+1. User is then redirected to original session.
+
 // Auth Service, Controller, and Module
 
 // Session Management - Extending Session Type, Token and Redirect URL

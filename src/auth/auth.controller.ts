@@ -13,16 +13,23 @@ export class AuthController {
   }
 
   @Get('logout')
-  async logout(@Req() req: Request, @Res() res: Response): Promise<any> {
-    req.session.destroy((err) => {
-      if (err) {
+  async logout(@Req() req: Request, @Res() res: Response): Promise<void> {
+    await this.authService
+      .signOut(req)
+      .then((status) => {
+        let message = 'Logged out successfully.';
+
+        // If the user token wasn't found, we consider the user not logged in.
+        if (status === HttpStatus.BAD_REQUEST) message = 'User not logged in.';
+
+        res.status(status).send({ message: message });
+      })
+      .catch((error) => {
+        console.error('Error logging out: ' + error.message);
         res
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .send({ message: 'Error logging out: ' + err.message });
-      }
-    });
-
-    res.status(HttpStatus.OK).send({ message: 'Logged out successfully.' });
+          .send({ message: 'Error logging out.' });
+      });
   }
 
   @Get('callback')
