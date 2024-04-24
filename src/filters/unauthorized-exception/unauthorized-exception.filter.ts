@@ -29,7 +29,7 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
 
     request.session.afterLoginRedirect = afterLoginRedirect;
 
-    // Log the error message.
+    // Log the user login attempt.
     console.error(
       '401 Unauthorized: User not logged in, redirecting to login.',
     );
@@ -38,11 +38,11 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
     response.redirect('auth/login');
   }
 
+  // Ensure redirect URL is on the same site as the request. Prevent redirects to malicious site.
   private validateRedirectHostname(
     afterLoginRedirectUrl: string,
     req: Request,
   ): boolean {
-    // Ensure redirect URL is on the same site as the request. Prevent redirects to malicious site.
     const url = new URL(afterLoginRedirectUrl, `http://${req.headers.host}`);
 
     if (url.hostname !== req.hostname) {
