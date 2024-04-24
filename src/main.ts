@@ -3,9 +3,11 @@ import { AppModule } from './app.module';
 import { VersioningType } from '@nestjs/common';
 import { validateCli } from '@1password/op-js';
 import * as session from 'express-session';
-import { UnauthorizedExceptionFilter } from './unauthorized-exception/unauthorized-exception.filter';
+import { UnauthorizedExceptionFilter } from './filters/unauthorized-exception/unauthorized-exception.filter';
 import crypto from 'crypto';
 import { ConfigService } from '@nestjs/config';
+import { InternalServerErrorExceptionFilter } from './filters/intServerError-exception/intServerError-exception.filter';
+import { ExceptionFilter } from '@nestjs/common';
 
 // Session Management - Using HTTPS?
 let isSessionSecure = true;
@@ -52,7 +54,12 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalFilters(new UnauthorizedExceptionFilter());
+  const filters: ExceptionFilter<any>[] = [
+    new UnauthorizedExceptionFilter(),
+    new InternalServerErrorExceptionFilter(),
+  ];
+
+  filters.forEach((filter) => app.useGlobalFilters(filter));
 
   await app.listen(3000);
 }

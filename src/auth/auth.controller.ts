@@ -1,4 +1,12 @@
-import { Controller, Get, HttpStatus, Query, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  InternalServerErrorException,
+  Query,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
 
@@ -20,15 +28,15 @@ export class AuthController {
         let message = 'Logged out successfully.';
 
         // If the user token wasn't found, we consider the user not logged in.
-        if (status === HttpStatus.BAD_REQUEST) message = 'User not logged in.';
+        if (status === HttpStatus.BAD_REQUEST) {
+          message = 'User not logged in.';
+        }
 
         res.status(status).send({ message: message });
       })
       .catch((error) => {
-        console.error('Error logging out: ' + error.message);
-        res
-          .status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .send({ message: 'Error logging out.' });
+        const errMessage = 'Error logging out: ' + error.message;
+        throw new InternalServerErrorException(errMessage);
       });
   }
 

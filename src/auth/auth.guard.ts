@@ -16,5 +16,6 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     return true;
+    // TODO: Handle when user can't get a token as they're unauthorized, prevent infinite loop.
   }
 }

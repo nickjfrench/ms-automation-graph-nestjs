@@ -82,7 +82,7 @@ export class AuthService {
       // Destroy user session to log out.
       req.session.destroy((err) => {
         if (err) {
-          reject(new Error('Error logging out: ' + err.message));
+          reject(new Error(err.message));
         }
       });
 
