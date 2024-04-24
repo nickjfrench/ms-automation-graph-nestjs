@@ -42,7 +42,7 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
     afterLoginRedirectUrl: string,
     req: Request,
   ): boolean {
-    // Ensure redirect URL is on the same site as the request.
+    // Ensure redirect URL is on the same site as the request. Prevent redirects to malicious site.
     const url = new URL(afterLoginRedirectUrl, `http://${req.headers.host}`);
 
     if (url.hostname !== req.hostname) {
