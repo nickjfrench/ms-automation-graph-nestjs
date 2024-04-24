@@ -1,4 +1,4 @@
-import { InternalServerErrorExceptionFilter } from './intServerError-exception.filter';
+import { InternalServerErrorExceptionFilter } from './internalServerError-exception.filter';
 
 describe('InternalServerExceptionFilter', () => {
   it('should be defined', () => {

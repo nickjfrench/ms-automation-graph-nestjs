@@ -6,7 +6,7 @@ import * as session from 'express-session';
 import { UnauthorizedExceptionFilter } from './filters/unauthorized-exception/unauthorized-exception.filter';
 import crypto from 'crypto';
 import { ConfigService } from '@nestjs/config';
-import { InternalServerErrorExceptionFilter } from './filters/intServerError-exception/intServerError-exception.filter';
+import { InternalServerErrorExceptionFilter } from './filters/internalServerError-exception/internalServerError-exception.filter';
 import { ExceptionFilter } from '@nestjs/common';
 
 // Session Management - Using HTTPS?
