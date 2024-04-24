@@ -13,7 +13,7 @@ export class AuthService {
   private msalClient: ConfidentialClientApplication;
 
   constructor(
-    // Setting ConfigService to infer environment variables types. Use infer: true within get method.
+    // Setting ConfigService to infer environment variables types to prevent TypeScript errors.
     private configService: ConfigService<
       {
         AZURE_CLIENT_ID: string;
@@ -26,8 +26,8 @@ export class AuthService {
   ) {
     const msalConfig: Configuration = {
       auth: {
-        // Infer: true will infer the type of the environment variable.
         clientId: this.configService.get<string>('AZURE_CLIENT_ID', {
+          // Infer the type of the environment variable from the types set in constructor. Prevents TypeScript error.
           infer: true,
         }),
         authority: `https://login.microsoftonline.com/${this.configService.get<string>('AZURE_TENANT_ID')}`,
