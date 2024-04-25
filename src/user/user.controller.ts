@@ -23,7 +23,7 @@ export class UserController {
   ): Promise<any> {
     try {
       const response = await this.userService.getUserProfile(
-        req.session.token!, // Can I get this from AuthGuard
+        req.session.token!,
       );
       res.status(HttpStatus.OK).send(response.data);
     } catch (error) {

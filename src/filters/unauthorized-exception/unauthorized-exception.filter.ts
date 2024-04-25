@@ -14,7 +14,6 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
 
-    // Validate and sanitize the afterLoginRedirect URL
     const afterLoginRedirect = request.url;
 
     // Validate the redirect URL before storing it in the session.
@@ -27,6 +26,7 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
       );
     }
 
+    // At this point the url is considered safe, so we can proceed.
     request.session.afterLoginRedirect = afterLoginRedirect;
 
     // Log the user login attempt.
@@ -34,7 +34,7 @@ export class UnauthorizedExceptionFilter implements ExceptionFilter {
       '401 Unauthorized: User not logged in, redirecting to login.',
     );
 
-    // Redirect to get authorization.
+    // Redirect to start authorization flow.
     response.redirect('auth/login');
   }
 

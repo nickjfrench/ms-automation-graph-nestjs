@@ -1,6 +1,8 @@
 # Learn Microsoft Automation with MS Graph APIs and NestJS Backend
 
-This repo hopes to provide an almost boilerplate setup for NestJS with access to Microsoft (MS) Graph APIs. I've also provided a write-up on how I developed this project, but this is not a tutorial. All I hope to provide is something that gets you off the ground and teaches you something along the way.
+This repo hopes to provide an almost boilerplate-like setup for NestJS with access to Microsoft (MS) Graph APIs. I've also provided a write-up on how I developed this project, but that is not a tutorial. All I hope to provide is something that gets you off the ground and teaches you something along the way.
+
+Upon cloning this project, you'll be able to call the /api/v1/user route to be redirected to Microsoft for Authorization and displayed your User Profile (from Microsoft).
 
 ## 📖 Why I Developed This Project
 
@@ -12,13 +14,15 @@ To access MS Graph APIs you need an access token, either application provided or
 
 I found the learning material to gain authorization on NestJS with MS to be quite lacking. Most materials focused on using gaining authentication integration for user login to access app resources, the option seen on many websites to "Sign in with Microsoft". However, I need to gain user authorization to access MS Graph APIs on their behalf.
 
+I hope to fill at least a part of this information gap with this repo.
+
 ### Write-Up on Development
 
 If you'd like to see my write-up on how I implemented this project, and hopefully learn something along the way, see the [How I Did It](#-how-i-did-it) section of this Readme.
 
 ### ❗ Disclaimer
 
-I am not an expert or authority on these topics, what I've done is just what I've learnt along the way. This repo is not production-grade nor secure. All I aim to provide is something that gets you off the ground and teaches you something along the way.
+I am not an expert or authority on these topics, what I've provided here is just what I've learnt along the way. This repo is not production-grade nor secure. All I aim to provide is something that gets you off the ground and teaches you something along the way.
 
 ## 🛠️ Setup Instructions
 
@@ -34,9 +38,13 @@ yarn install
 
 ### ☁️ Azure Entra App Registration
 
-// Set Scopes as per `appConfig.json`
+A detailed step-by-step guide is included within [/docs/write-up/README.md](/docs/write-up/README.md).
 
-// Set RedirectURI to `http://localhost:3000/api/v1/auth/callback` or production equivalent.
+The TLDR:
+
+- Set Scopes as per `appConfig.json` : "AZURE_SCOPES"
+- Set RedirectURI to `http://localhost:3000/api/v1/auth/callback` or production equivalent.
+- Copy the Azure secrets listed in the next heading.
 
 ### 🔑 Secrets
 
@@ -91,7 +99,7 @@ yarn run test:cov
 Sticking to API standards, all routes in this project are prefixed with `/api/v1/{route_path}`.
 E.g. /api/v1/user
 
-This is set within [/src/main.ts](/src/main.ts).
+This is configured within [/src/main.ts](/src/main.ts).
 
 ## 🪧 License
 
@@ -103,6 +111,6 @@ Feel free to use it as you like.
 
 I like to document my process to solidify what I learn, so I hope you get some value out of this too.
 
-See [docs/write-up/README.md](docs/write-up/README.md) for write up on how I developed this project.
+See [docs/write-up/README.md](docs/write-up/README.md) for the write up on how I developed this project.
 
 This write up isn't a "code as we go" tutorial, instead acts as clone-able codebase that will explain the decisions made and logic being performed.
