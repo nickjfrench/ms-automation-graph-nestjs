@@ -33,13 +33,13 @@ Depending whether you're using Azure's Entra or M365 Entra (through Dev environm
 
 Navigate to [Microsoft Entra ID](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and find App Registration within side menu.
 
-![Location of Azure App Registration Button](images/00-Entra/Azure-App-Registration.png)
+<img src="images/00-Entra/Azure-App-Registration.png" alt="Location of Azure App Registration Button" height="400"/>
 
 ### M365 Entra (Dev Environment)
 
 Navigate to [Microsoft Entra admin center](https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade/quickStartType~/null/sourceType/Microsoft_AAD_IAM) and find App registration under Applications dropdown in side menu.
 
-![Location of Entra App Registration Button](images/00-Entra/Entra-App-Registration.png)
+<img src="images/00-Entra/Entra-App-Registration.png" alt="Location of Entra App Registration Button" height="400"/>
 
 ### App Registration
 
@@ -49,7 +49,7 @@ Steps to register an application are the same regardless of M365 Entra or Azure 
 1. Name the application, select the support account type that applies to you. For internal organization use, select the first option. This restricts login access to only this user directory.
 1. Enter the Redirect URI `{domain/localhost}/api/v1/auth/callback`. `HTTP` and `localhost` for development, or use `HTTPS` and domain for production.
 
-![Details of App Registration](images/00-Entra/Register-an-Application.png)
+<img src="images/00-Entra/Register-an-Application.png" alt="Details of App Registration" height="400"/>
 
 ### App Certifications & Secrets
 
@@ -59,18 +59,18 @@ Steps to register an application are the same regardless of M365 Entra or Azure 
 1. Paste it within your secret management process, for `AZURE_CLIENT_SECRET`.
    See the Secrets section of project [Readme](../../README.md).
 
-![Certificates and Secrets Page](images/00-Entra/Certificates-Secrets.png)
+<img src="images/00-Entra/Certificates-Secrets.png" alt="Certificates and Secrets Page"/>
 
 ### API Permissions - Scope
 
 1. Within the API Permissions section, click Add Permission.
 1. Choose Microsoft Graph, then Delegated Permissions.
-1. Search and add for each Scope listed within [appConfig.json](appConfig.json) file. E.g. `User.Read` etc.
+1. Search and add for each Scope listed within [appConfig.json](../../appConfig.json) file. E.g. `User.Read` etc.
 1. Back on the listed Configured Permissions, click Grant admin consent for MSFT.
 
-![API Permissions Page](images/00-Entra/API-Permissions.png)
+<img src="images/00-Entra/API-Permissions.png" alt="API Permissions Page" />
 
-![Request API Permission popup](images/00-Entra/Request-API-Permissions.png)
+<img src="images/00-Entra/Request-API-Permissions.png" alt="Request API Permission popup" height="600"/>
 
 ### Copy Tenant and Client ID
 
@@ -78,7 +78,7 @@ Steps to register an application are the same regardless of M365 Entra or Azure 
 1. Copy the Application (client) ID and Directory (tenant) ID, and save into secrets management for `AZURE_CLIENT_ID` and `AZURE_TENANT_ID`.
    See the Secrets section of project [Readme](../../README.md).
 
-![Copy Client and Tenant IDs](images/00-Entra/Copy-Client-Tenant-IDs.png)
+<img src="images/00-Entra/Copy-Client-Tenant-IDs.png" alt="Copy Client and Tenant IDs" height="300"/>
 
 ### Generate Secret Key for Session Management
 
