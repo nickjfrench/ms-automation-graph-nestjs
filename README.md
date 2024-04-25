@@ -1,16 +1,20 @@
 # Learn Microsoft Automation with MS Graph APIs and NestJS Backend
 
-This repo hopes to provide an almost boilerplate setup for NestJS with access to Microsoft Graph APIs. I've also provided a write-up on how I developed this project, but this is not a tutorial. All I hope to provide is something that gets you off the ground and teaches you something along the way.
+This repo hopes to provide an almost boilerplate setup for NestJS with access to Microsoft (MS) Graph APIs. I've also provided a write-up on how I developed this project, but this is not a tutorial. All I hope to provide is something that gets you off the ground and teaches you something along the way.
 
 ## 📖 Why I Developed This Project
 
-I would love to automate some annoying steps I often have to repeat a lot within the Microsoft (MS) suite (Teams, SharePoint, etc.), but I've found their no-code solutions lacking, so I thought lets just access Microsoft Graph APIs in code. I also want to learn NestJS in a practical way, so I thought why not learn both at the same time.
+I would love to automate some annoying steps I often have to repeat a lot within the Microsoft suite (e.g. Teams, SharePoint), but I've found their no-code solutions limiting when I could do so much more with actual code, so I thought lets just access Microsoft Graph APIs in code.
+
+I also want to learn NestJS, so why not use this opportunity to learn both in a practical purpose.
 
 To access MS Graph APIs you need an access token, either application provided or user delegated. To utilize the existing user access controls on Azure and ensuring a user is not performing something they wouldn't normally be able to do, I needed user delegated.
 
-I found the learning material to gain authorization on NestJS with MS to be quite lacking. Most materials focused on using gaining authentication integration for user login to access app resources, similar to the options seen on many websites to Sign in with Microsoft. However, I need to gain user authorization to access MS Graph APIs on their behalf.
+I found the learning material to gain authorization on NestJS with MS to be quite lacking. Most materials focused on using gaining authentication integration for user login to access app resources, the option seen on many websites to "Sign in with Microsoft". However, I need to gain user authorization to access MS Graph APIs on their behalf.
 
-If you'd like to see my write-up on how I implemented this project, and hopefully learn something along the way, see the How I Did It section of this Readme.
+### Write-Up on Development
+
+If you'd like to see my write-up on how I implemented this project, and hopefully learn something along the way, see the [How I Did It](#-how-i-did-it) section of this Readme.
 
 ### ❗ Disclaimer
 
@@ -51,7 +55,7 @@ I'm using 1Password to manage secrets for this project. That means no secrets ar
 If you wish to use 1Password, ensure 1Password CLI is set up correctly and you're using 1Password secret paths within a .env file. For example, my `.env.development.local` file contains: `AZURE_TENANT_ID=op://Dev/azure-entra/tenant-id`.
 Then start the project with `yarn start:dev_op`.
 
-If not using 1Password, ignore this section and just use the standard Node start scripts (that have no `_op` appended). Feel free to remove the 1Password package as well.
+If not using 1Password, ignore this section, use the standard Node start scripts (that have no `_op` appended), and feel free to remove the 1Password package and any mention.
 
 ### 🏃 Running the app
 
@@ -81,6 +85,13 @@ yarn run test:e2e
 # test coverage
 yarn run test:cov
 ```
+
+### 🛣️ Route Prefix
+
+Sticking to API standards, all routes in this project are prefixed with `/api/v1/{route_path}`.
+E.g. /api/v1/user
+
+This is set within [/src/main.ts](/src/main.ts).
 
 ## 🪧 License
 
