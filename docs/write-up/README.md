@@ -1,20 +1,18 @@
 # Write Up of Implementation
 
-This write up isn't a "code as we go" tutorial, instead acts as clone-able codebase that will explain the decisions made and logic being performed.
+This write up isn't a "code as we go" tutorial, instead I aim to explain how I've implemented the Microsoft Auth library and handled the OAuth flow, and bridge this current gap in knowledge.
 
 ## Pre-requisites
 
-I'll try to explain what I've done at an almost beginner level for people new to NestJS and OAuth.
+As this write-up aims to fill an specific knowledge gap, I won't be explaining in-depth concepts for NestJS, TypeScript/JS, Web Development, RESTful APIs, or other information that is readily available in documentation. 
 
-I am aiming to fill the gap of knowledge for using NestJS with User Delegated Microsoft Authorization to access MS Graph APIs.
-
-I won't be explaining in-depth concepts for NestJS, TypeScript/JS, Web Development, RESTful APIs, or other information that is readily available in documentation.
+So I suggest familiarizing yourself with those topics.
 
 ## 0. Azure Entra App Registration
 
-This section is a requirement for to run this application.
+This section is a requirement for this application to function.
 
-We need to get the Azure secrets and IDs to get user delegated authorization that we can use to call the Microsoft Graph APIs.
+This is needed to get the Azure secrets and IDs for user delegated authorization through Microsoft Identity Platform, allowing us to call MS Graph APIs.
 
 ### M365 Dev Environment
 
@@ -47,8 +45,8 @@ Navigate to [Microsoft Entra admin center](https://entra.microsoft.com/#view/Mic
 The following steps to register an application are the same regardless of M365's Entra or Azure's Entra.
 
 1. Start a new Registration.
-1. Name the application, select the support account type that applies to you. For internal organization use, select the first option. This restricts login access to only this directory.
-1. Enter the Redirect URI `{domain/localhost}/api/v1/auth/callback`. `HTTP` and `localhost` for development, or use `HTTPS` and domain for production.
+1. Name the application, select the support account type that applies to you. For internal organization use, select the first option, this restricts login access to only this directory.
+1. Enter the Redirect URI `{domain/localhost}/api/v1/auth/callback`. `http:/localhost:3000` for development, or use `HTTPS` and domain for production.
 
 <img src="images/00-Entra/Register-an-Application.png" alt="Details of App Registration" height="400"/>
 
@@ -58,7 +56,7 @@ The following steps to register an application are the same regardless of M365's
 1. Enter a name and expiry date.
 1. Copy Client Secret, as this is the only time you'll see it.
 1. Paste it within your secret management process, for `AZURE_CLIENT_SECRET`.
-   See the Secrets section of project [Readme](../../README.md).
+   See the Secrets section of project [Readme](../../README.md#-secrets).
 
 <img src="images/00-Entra/Certificates-Secrets.png" alt="Certificates and Secrets Page" height="300"/>
 
@@ -77,7 +75,7 @@ The following steps to register an application are the same regardless of M365's
 
 1. Navigate back to Overview page of app registration.
 1. Copy the Application (client) ID and Directory (tenant) ID, and save into secrets management for `AZURE_CLIENT_ID` and `AZURE_TENANT_ID`.
-   See the Secrets section of project [Readme](../../README.md).
+   See the Secrets section of project [Readme](../../README.md#-secrets).
 
 <img src="images/00-Entra/Copy-Client-Tenant-IDs.png" alt="Copy Client and Tenant IDs" height="300"/>
 
@@ -88,7 +86,7 @@ Express-Session requires a secret key to be set. You can read more at the [Expre
 It's recommended to use at least a 32-byte random string (64 characters).
 
 Save this secret within your secrets management for `SESSION_SECRET_KEY`.
-See the Secrets section of project [Readme](../../README.md).
+See the Secrets section of project [Readme](../../README.md#-secrets).
 
 ### Environment Variables
 
@@ -593,4 +591,4 @@ That's it, hopefully you gained useful knowledge from this write-up.
 
 I may continue to update this repo as I find better ways of doing the above, but I will not be expanding the scope above what it is currently.
 
-If you find any bugs/issues or have suggestions, please raise an [Issue](https://github.com/nickjfrench/ms-graph-msal-nestjs/issues) and I would be happy to chat further. After all, the purpose of this project is to learn, and that includes from community.
+If you find any bugs/issues or have suggestions for either the code or this write-up, please raise an [Issue](https://github.com/nickjfrench/ms-graph-msal-nestjs/issues) and I would be happy to chat further. After all, the purpose of this project is to learn, and that includes from community.
