@@ -10,6 +10,7 @@ import * as appConfig from 'appConfig.json';
 
 @Injectable()
 export class AuthService {
+  // ConfidentialClientApplication is used for WebApp and WebAPI scenarios. See MSAL-Node docs for more info.
   private msalClient: ConfidentialClientApplication;
 
   constructor(
@@ -64,6 +65,7 @@ export class AuthService {
 
     // Code is received in the URL from Redirection URI. MSAL then handles the exchange of code for token.
     const response = await this.msalClient.acquireTokenByCode(tokenRequest);
+
     req.session.token = response.accessToken;
 
     // Log user sign in.

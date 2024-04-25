@@ -1,49 +1,28 @@
-# Learning Microsoft Automation with MS Graph APIs - NestJS Backend
+# Learn Microsoft Automation with MS Graph APIs and NestJS Backend
 
-## 📖 Description
+This repo hopes to provide an almost boilerplate setup for NestJS with access to Microsoft Graph APIs. I've also provided a write-up on how I developed this project, but this is not a tutorial. All I hope to provide is something that gets you off the ground and teaches you something along the way.
 
-Microsoft Teams is kind of terrible, but like many employees, I'm stuck in a Microsoft world.
-I would love to automate some annoying steps I often have to repeat a lot.
-I also want to learn NestJS in a practical way, so why not learn both at the same time.
+## 📖 Why I Developed This Project
 
-This repo is to document my learning in developing a backend API that can authenticate with a Azure tenant, and automate the creation and modification of Microsoft Teams channels/teams, SharePoint, and Microsoft Lists (aka SharePoint Lists).
+I would love to automate some annoying steps I often have to repeat a lot within the Microsoft (MS) suite (Teams, SharePoint, etc.), but I've found their no-code solutions lacking, so I thought lets just access Microsoft Graph APIs in code. I also want to learn NestJS in a practical way, so I thought why not learn both at the same time.
 
-During this project, I found the online material for NestJS with Microsoft OAuth2.0 Flow to be quite confusing.
-If you'd like to see how I did it, scroll to the How I Did It section of this Readme.
+To access MS Graph APIs you need an access token, either application provided or user delegated. To utilize the existing user access controls on Azure and ensuring a user is not performing something they wouldn't normally be able to do, I needed user delegated.
 
-**Disclaimer**: I'm no expert or authority on these technologies, what I've done is just what I've learnt along the way and is definitely not production-safe. All I hope is that it gets you off the ground.
+I found the learning material to gain authorization on NestJS with MS to be quite lacking. Most materials focused on using gaining authentication integration for user login to access app resources, similar to the options seen on many websites to Sign in with Microsoft. However, I need to gain user authorization to access MS Graph APIs on their behalf.
 
-### ⭐ Goals
+If you'd like to see my write-up on how I implemented this project, and hopefully learn something along the way, see the How I Did It section of this Readme.
 
-What I hope to achieve with this project:
+### ❗ Disclaimer
 
-#### 📝 Basic Features
-
-- [ ] Authenticate with Azure, using the users session (and their permissions).
-- [ ] Get list of all teams user is a member of.
-- [ ] Create a team.
-- [ ] Create a private channel within above team.
-- [ ] Access SharePoint site within the private channel.
-- [ ] Create a SharePoint List within site.
-- [ ] Populate with some rows.
-- [ ] Upload a few documents to the SharePoint site.
-- [ ] Pin SharePoint List to channel tab.
-
-#### 🗂️ Full Automation
-
-To take it a step further, I would like to use pre-defined templates to structure the Teams, Channels, and Lists.
-
-- [ ] Data structure for template different projects. (Probably just JSON hard coded for now. Look at Docker Compose files for ideas.)
-- [ ] Provide a name and create team, if it doesn't exist already.
-- [ ] From project options, create a channel.
-- [ ] Based on project selected, create SharePoint Lists with columns and formatting defined in template.
-- [ ] Based on project selected, create SharePoint List example rows.
-- [ ] Based on project selected, populate SharePoint site with folder structures and files.
-- [ ] Based on project selected, pin relevant tabs to Teams channel.
+I am not an expert or authority on these topics, what I've done is just what I've learnt along the way. This repo is not production-grade nor secure. All I aim to provide is something that gets you off the ground and teaches you something along the way.
 
 ## 🛠️ Setup Instructions
 
 ### 🔧 Installation
+
+Install NodeJS, Yarn, and NestJS CLI.
+
+Then install the package dependencies with:
 
 ```bash
 yarn install
@@ -67,12 +46,12 @@ Set the below secrets as per <https://docs.nestjs.com/techniques/configuration>.
 
 #### 🔒 1Password CLI for Secret Management
 
-I'm using 1Password to manage secrets for this project. That means no secrets are stored in files or in environment variables. This is optional, although the package will be installed regardless.
+I'm using 1Password to manage secrets for this project. That means no secrets are stored in files or in environment variables. This is optional, although the dev package will be installed regardless.
 
 If you wish to use 1Password, ensure 1Password CLI is set up correctly and you're using 1Password secret paths within a .env file. For example, my `.env.development.local` file contains: `AZURE_TENANT_ID=op://Dev/azure-entra/tenant-id`.
 Then start the project with `yarn start:dev_op`.
 
-If not using 1Password, ignore this section and just use the standard start scripts (that have no `_op` appended).
+If not using 1Password, ignore this section and just use the standard Node start scripts (that have no `_op` appended). Feel free to remove the 1Password package as well.
 
 ### 🏃 Running the app
 
@@ -83,7 +62,7 @@ yarn start
 # watch mode
 yarn start:dev
 
-# watch mode with 1Password CLI secrets management 
+# watch mode with 1Password CLI secrets management
 yarn start:dev_op
 
 # production mode
@@ -107,8 +86,12 @@ yarn run test:cov
 
 As this project is for my own learning, this repo is [MIT licensed](LICENSE).
 
+Feel free to use it as you like.
+
 ## 🧑‍🏫 How I Did It
 
 I like to document my process to solidify what I learn, so I hope you get some value out of this too.
 
-See [docs/write-up/README.md](docs/write-up/README.md) for step-by-step write up on how I implemented this project.
+See [docs/write-up/README.md](docs/write-up/README.md) for write up on how I developed this project.
+
+This write up isn't a "code as we go" tutorial, instead acts as clone-able codebase that will explain the decisions made and logic being performed.
